@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # generator-nando-polymer [![Build Status](https://secure.travis-ci.org/someuser/generator-nando-polymer.png?branch=master)](https://travis-ci.org/someuser/generator-nando-polymer)
 
 A generator for [Yeoman](http://yeoman.io).
@@ -74,3 +75,9 @@ If you'd like to get to know Yeoman better and meet some of his friends, [Grunt]
 ## License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
+=======
+generator-nando-polymer
+=======================
+
+A Yeoman generator for an alternative Polymer workflow
+>>>>>>> a9c66fa013031280ac82f7e6e371a07619339c01
