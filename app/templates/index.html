@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src='../bower_components/polymer/polymer.min.js'></script>
+        <script src="/socket.io/socket.io.js" ></script>
+
+        <link rel="import" href="html/<%= nombreApp %>/<%= nombreApp %>.html" >
+
+        <title><%= _.capitalize(nombreApp) %></title>
+
+    </head>
+    <body>
+        <nando-<%= _.slugify(nombreApp) %>></nando-<%= _.slugify(nombreApp) %>>
+        <script>
+            var ws = io.connect( '/' );
+
+            ws.on( 'listo', function() {
+                document.querySelector( 'body' ).insertAdjacentHTML( 'beforeend', '<p>Conectado con el WebSocket!</p>');
+                document.querySelector( 'body' ).insertAdjacentHTML( 'beforeend', '<p>Connected to WebSocket!</p>');
+            });
+        </script>
+    </body>
+</html>
