@@ -8,8 +8,6 @@ A generator for [Yeoman](http://yeoman.io).
 
 Trick question. It's not a thing. It's this guy:
 
-![](http://i.imgur.com/JHaAlBJ.png)
-
 Basically, he wears a top hat, lives in your computer, and waits for you to tell him what kind of application you wish to create.
 
 Not every new computer comes with a Yeoman pre-installed. He lives in the [npm](https://npmjs.org) package repository. You only have to ask for him once, then he packs up and moves into your hard drive. *Make sure you clean up, he likes new and shiny things.*
@@ -36,11 +34,23 @@ $ yo nando-polymer
 
 ### Usage
 
-When you first install generator-nando-polymer this is the structure you'll find:
+When you install generator-nando-polymer go to your project folder and type: 
+
+```
+$ yo nando-polymer
+```
+
+You'll be prompted with various questions:
+
+What's your name?	( Defaulting to my name )
+What's your application name?
+What's is your app custom tag? 	( It refers in <x-component> the 'x' part. Every webComponent must have a dash ).
+If your application is going to use a server with socket.io enter a number port.
+
+The first three questions are mandatory, the last if you don't type anything just doesn't add the server scaffolding.
+After answering the initial questions, yeoman starts downloading every npm module and bower package needed. The resulting folder structure is similar to this:
 
 rootFolder
-|- app.js       In this file there will be configured by default socket.io with express.js
-|- config.rb    Configuration file for use compass
 |- gruntfile.js variuos tasks like watch, compass, cssmin and a couple of my own
 |- package.json 
 |- tareas
@@ -48,28 +58,33 @@ rootFolder
 |   |- specAPoly.js     Takes a file.spec.js file and turns it into file.js for Polymer testing
 |- public
     |- html
-        |- index.html   Index if the app with a little test for socket.io
-        |- folderWithTheNameOfYourApp
-        |- various failes with skeleton of your component App
+    |   |- index.html
+    |   |- folderWithTheNameOfYourApp
+    |   |- various failes with skeleton of your component App
+    |- bower_components/	have Jquery and Polymer
+    |- bower.json
 
-Type 'node app.js' and if you use [bracket editor](http:brackets.io) select your index.html and start live editing. If everything went OK, you shall see some 'Connected to WebSocket!' message.
+If you use [bracket editor](http:brackets.io) select your index.html and start live editing.
+
+When you type a number port, it's added various files like an app.js where is the logic to initiate the server. Yeoman downloads Express and Socket.io modules and It's added on index.html some sample code for verify everithing went ok on the server.
+
+To start the server on another terminal type: 'npm start' or 'node app.js' and launch your browser and type 'localhost:YOUR_PORT'. You'll see some test text.
 
 To start polymerizing, on another terminal window type 'grunt' and start editing your files on public/html/folderOfYourApp/
 
-To create a Component, type 
+// TODO: add some videos
+
+## To create a Component, type 
 
 ```
-$ yo nando-polymer:componente 'componentName'
+$ yo nando-polymer:componente componentName
 ```
 
-With it, you'll create a folder componentName/ with the files needed. See the video // TODO
+With it, you'll create a folder componentName/ with the files needed. You'll be asked with more questions:
+Import this to another component (N))?	It's a Y/N question. If you type Y:
+Type path to the other component:		You must type relative path to the other component
 
-### Getting To Know Yeoman
-
-Yeoman has a heart of gold. He's a person with feelings and opinions, but he's very easy to work with. If you think he's too opinionated, he can be easily convinced.
-
-If you'd like to get to know Yeoman better and meet some of his friends, [Grunt](http://gruntjs.com) and [Bower](http://bower.io), check out the complete [Getting Started Guide](https://github.com/yeoman/yeoman/wiki/Getting-Started).
-
+You can check on when importing components that it's added a link to the created one.
 
 ## License
 

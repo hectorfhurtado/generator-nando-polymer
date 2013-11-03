@@ -1,6 +1,6 @@
 /**
- * @aauthor Héctor Fernando Hurtado
- * @version 2013-09-03
+ * @author Héctor Fernando Hurtado
+ * @version 2013-11-03
  */
 /* global module */
 
@@ -76,9 +76,11 @@ module.exports = function( grunt ) {
                 " * @version\t" + hoy.getFullYear() + "-" + formatearNumero( hoy.getMonth() + 1 ) + "-" + formatearNumero( hoy.getDate() ) + "\n" +
                 " */\n\n" +
                 "/* global Polymer */\n\n" +
-                "Polymer( '" + extraidoDestino + "', {\n" +
-                extraidoFuente + "\n" +
-                "});";
+                "( function() {\n" + 
+                "\tPolymer( '" + extraidoDestino + "', {\n" +
+                "\t" + extraidoFuente + "\n" +
+                "\t});" + 
+                "})()";
 
             grunt.file.write( destino, total );
             grunt.log.writeln( 'Modificado el archivo: ' + src + '\nResultado en ' + destino );

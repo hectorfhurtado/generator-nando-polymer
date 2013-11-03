@@ -43,7 +43,7 @@ module.exports = function (grunt) {
                         expand: true,
                         src: 'public/html/**',
                         dest: 'dist/'
-                    },
+                    }<% if ( puerto ) {%>,
                     {
                         expand: true,
                         src: [ 'routes/**', 'views/**' ],
@@ -53,7 +53,7 @@ module.exports = function (grunt) {
                         espand: true,
                         src: 'app.js',
                         dest: 'dist/'
-                    }
+                    }<% } %>
                 ]
             }
         },
@@ -100,39 +100,33 @@ module.exports = function (grunt) {
         },
 
         clean: {
+            precopy: {
+                expand: true,
+                src: [
+                    'public/**/*.spec/*.*',
+                    'public/**/*.spec/'
+                ]
+            },
+            postcopy: {
+                expand: true,
+                src: [
+                    'dist/public/html/**/*.test.html',
+                    'dist/public/html/**/*.spec.html',
+                    'dist/**/*.spec.js'
+                ]
+            },
             build: {
                 expand: true,
                 src: [
+                    'dist/public/html/**/*.test.html',
+                    'dist/public/html/**/*.spec.html',
+                    'dist/**/*.spec.js',
                     'dist/public/html/**/*.js',
                     'dist/public/html/**/*.css',
                     'dist/public/html/**/*.scss',
                     'dist/public/html/**/*.map',
-                    'dist/public/html/**/*.test.html',
-                    'dist/public/html/**/*.spec.html',
-                    'dist/**/*.spec.js',
-                    'dist/**/*.spec/*.*',
-                    'dist/**/*.spec/',
                     'dist/**/*.txt'
                 ]
-            }
-        },
-
-        cambioString: {
-            ip: {
-                options: {
-                    strActual: '10.30.2.84',
-                    strNuevo: '10.30.4.169'
-                },
-                expand: true,
-                src: 'dist/servidor/**/*.js'
-            },
-            plink: {
-                options: {
-                    strActual: 'algunString',
-                    strNuevo: 'otroString'
-                },
-                expand: true,
-                src: 'dist/servidor/**/*.js'
             }
         },
 
@@ -140,21 +134,6 @@ module.exports = function (grunt) {
             build: {
                 expand: true,
                 src: 'public/html/**/*.spec.js'
-            }
-        },
-
-        karma: {
-            test: {
-                options: {
-                    configFile: 'karma.conf.js',
-                    background: true
-                }
-            },
-            build: {
-                options: {
-                    configFile: 'karma.conf.js',
-                    singleRun: true
-                }
             }
         }
     });
@@ -173,13 +152,15 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'specAPoly:build',
+        'clean:precopy',
         'copy',
+        'clean:postcopy',
         'uglify:public',
         'sass',
         'cssmin',
         'polyconcat',
         'htmlmin',
-        'clean',
-        // 'cambioString'
+        'clean:build',
+        'cambioString'
     ]);
 };

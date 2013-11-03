@@ -1,6 +1,6 @@
 /**
- * @aauthor Héctor Fernando Hurtado
- * @version 2013-07-24
+ * @author Héctor Fernando Hurtado
+ * @version 2013-11-03
  */
 /* global module */
 

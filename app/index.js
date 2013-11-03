@@ -30,28 +30,34 @@ NandoPolymerGenerator.prototype.askFor = function askFor() {
         name: 'nombreApp',
         message: 'Cómo quieres llamar tu aplicación?'
     }, {
+        name: 'customTag',
+        message: 'Cuál va a ser el custom tag?, por ejemplo en <x-componente> la "x"',
+        default: 'nando'
+    },
+	{
         name: 'puerto',
-        message: 'Qué puerto usarás para la aplicación?'
+        message: 'Si tu aplicación va a usar un servidor con socket.io, escribe el puerto del servidor'
     }];
 
     this.prompt(prompts, function (props) {
 		this.nombreApp	= props.nombreApp;
         this.autor		= props.autor;
         this.puerto		= props.puerto;
+        this.customTag  = props.customTag;
 
         cb();
     }.bind(this));
 };
 
 NandoPolymerGenerator.prototype.app = function app() {
-    var componente = this.nombreApp;
-    var componenteSlugish = this.nombreApp.replace( /([A-Z])/g, '-$1' );
-    var componenteCapitalize = this.nombreApp[ 0 ].toUpperCase() + this.nombreApp.slice( 1 );
-    var hoy = new Date();
+    this.componente           = this.nombreApp;
+    this.componenteSlugish    = this.nombreApp.replace( /([A-Z])/g, '-$1' );
+    this.componenteCapitalize = this.nombreApp[ 0 ].toUpperCase() + this.nombreApp.slice( 1 );
+    this.hoy = new Date();
 
     this.mkdir('public');
     this.mkdir('public/html');
-    this.mkdir('public/html/' + componente );
+    this.mkdir('public/html/' + this.componente );
     this.mkdir('tareas');
 
     this.template('_package.json', 'package.json');
@@ -60,62 +66,26 @@ NandoPolymerGenerator.prototype.app = function app() {
     this.template('_config.js', 'config.js');
     this.template('Gruntfile.js', 'gruntfile.js');
     this.template('index.html', 'public/html/index.html');
-    this.template('app.js', 'app.js');
+    
+    if ( this.puerto ) {
+    	this.template('app.js', 'app.js');
+    }
 
-    this.copy('tareas/polyconcat.js', 'tareas/polyconcat.js');
-    this.copy('tareas/specAPoly.js', 'tareas/specAPoly.js');
+    this.copy( 'tareas/polyconcat.js', 'tareas/polyconcat.js' );
+    this.copy( 'tareas/specAPoly.js', 'tareas/specAPoly.js' );
+    
+	this.template( 'archivo.spec.js', 'public/html/' + this.componente + '/' + this.componente + '.spec.js' );
+    this.template( 'archivo.scss', 'public/html/' + this.componente + '/' + this.componente + '.scss' );
+    this.template( 'archivo.css', 'public/html/' + this.componente + '/' + this.componente + '.css' );
+	this.template( 'archivo.js', 'public/html/' + this.componente + '/' + this.componente + '.js' );
+    this.template( 'archivo.html', 'public/html/' + this.componente + '/' + this.componente + '.html' );
 
-    this.write( 'public/html/' + componente + '/' + componente + '.spec.js', '/**\n * @author\t' + this.autor +
-        '\n * @version\t' + hoy.getFullYear() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getDate() + '\n */\n\n' +
-        'var ' + componenteCapitalize + ' = {\n' +
-            '\t// TODO\n' +
-        '};\n\n' +
+    exec( 'bower install', { cwd: path.join( this.env.cwd, '/public' )}, function ( error, stdout, stderr ) {
+        console.log( 'stdout: ' + stdout );
+        console.log( 'stderr: ' + stderr );
 
-        'describe( \'Componente ' + componente + '\', function() {\n' +
-            '\tvar ' + componente + ';\n\n' +
-
-            '\tbeforeEach( function() {\n\t\t' +
-                componente  + ' = Object.create( ' + componenteCapitalize + ' );\n' +
-            '\t});\n\n' +
-
-            '\tit( \'debería ...\', function() {\n' +
-                '\t\texpect( true ).toBe( true );\n' +
-            '\t});\n' +
-        '});\n'
-    );
-
-    this.write( 'public/html/' + componente + '/' + componente + '.scss', '/**\n * @author\t' + this.autor +
-        '\n * @version\t' + hoy.getFullYear() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getDate() + '\n */\n\n' +
-        '.' + componenteCapitalize + ' {\n\n' + '}');
-
-    this.write( 'public/html/' + componente + '/' + componente + '.js', '/**\n * @author\t' + this.autor +
-        '\n * @version\t' + hoy.getFullYear() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getDate() + ' */\n\n' +
-        'Polymer( \'nando-' + componenteSlugish + '\', {\n' +
-            '\t//TODO\n' +
-        '});'
-    );
-
-    this.write( 'public/html/' + componente + '/' + componente + '.html', '<!--\n/**\n * @author\t' + this.autor +
-        '\n * @version\t' + hoy.getFullYear() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getDate() + '\n */\n-->\n\n' +
-        '<polymer-element name="nando-' + componenteSlugish + '">\n' +
-            '\t<template>\n' +
-                '\t\t<link href="' + componente + '.css" rel="stylesheet">\n\n' +
-
-                '\t\t<section class="' + componenteCapitalize + '" >\n\n' +
-
-                '\t\t</section>\n' +
-            '\t</template>\n\n' +
-
-            '\t<script type="text/javascript" src="' + componente + '.js" ></script>\n' +
-        '</polymer-element>'
-    );
-
-    exec( 'bower install', { cwd: path.join( this.env.cwd, '/public' )}, function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-
-        if (error !== null) {
-          	console.log('exec error: ' + error);
+        if ( error !== null ) {
+        	console.log( 'exec error: ' + error );
         }
     });
 };
