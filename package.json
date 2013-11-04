@@ -1,7 +1,7 @@
 {
   "name": "generator-nando-polymer",
-  "version": "0.0.4",
-  "description": "A generator for Yeoman",
+  "version": "0.0.5",
+  "description": "A Polymer generator for Yeoman",
   "keywords": [
     "yeoman-generator",
     "polymer"
@@ -10,7 +10,7 @@
   "bugs": "https://github.com/hectorfhurtado/generator-nando-polymer/issues",
   "author": {
     "name": "Héctor Fernando Hurtado",
-    "email": "hurtado.fernando@gmail.com",
+    "email": "nandodayo@hotmail.com",
     "url": "https://github.com/hectorfhurtado"
   },
   "main": "app.js",
@@ -22,7 +22,7 @@
     "test": "jasmine"
   },
   "dependencies": {
-    "yeoman-generator": ">=1.0.4"
+    "yeoman-generator": ">=0.14.0-rc.1"
   },
   "devDependencies": {
   },
