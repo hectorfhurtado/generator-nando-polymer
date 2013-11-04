@@ -33,8 +33,17 @@ NandoPolymerGenerator.prototype.askFor = function askFor() {
         name: 'customTag',
         message: 'Cuál va a ser el custom tag?, por ejemplo en <x-componente> la "x"',
         default: 'nando'
-    },
-	{
+    }, {
+        type: 'confirm',
+        name: 'usoSass',
+        message: 'Vas a usar Sass en tu proyecto',
+        default: false
+    }, {
+        type: 'confirm',
+        name: 'usoCoffeeScript',
+        message: 'Vas a usar CoffeeScript en tu proyecto',
+        default: false
+    }, {
         name: 'puerto',
         message: 'Si tu aplicación va a usar un servidor con socket.io, escribe el puerto del servidor'
     }];
@@ -44,6 +53,8 @@ NandoPolymerGenerator.prototype.askFor = function askFor() {
         this.autor		= props.autor;
         this.puerto		= props.puerto;
         this.customTag  = props.customTag;
+        this.usoSass    = props.usoSass;
+        this.usoCoffeeScript = props.usoCoffeeScript;
 
         cb();
     }.bind(this));

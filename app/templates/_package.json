@@ -19,7 +19,9 @@
     "grunt-contrib-cssmin": "latest",
     "grunt-contrib-htmlmin": "latest",
     "grunt-contrib-clean": "latest",
-    "grunt-contrib-sass": "latest",
-    "jasmine-node": "latest"
+    <% if ( usoSass === true ) { %>"grunt-contrib-sass": "latest", <% } %>
+    <% if ( usoCoffeeScript === true ) { %>"grunt-contrib-coffee": "latest", <% } %>
+    "jasmine-node": "latest",
+    "grunt-newer": "latest"
   }
 }

@@ -4,22 +4,30 @@
 module.exports = function (grunt) {
 
     grunt.initConfig({
-        watch: {
+        watch: {<% if ( usoSass === true ) { %>
             css: {
                 files: 'public/html/**/*.scss',
-                tasks: [ 'sass' ],
+                tasks: [ 'newer:sass' ],
                 options: {
                     nospawn: true
                 }
             },
-            componente: {
+            <% }% ><% if ( usoCoffeeScript === true ) { %>
+        	coffee: {
+                files: 'public/html/**/*.coffee',
+                tasks: [ 'newer:coffee' ],
+                options: {
+                    nospawn: true
+                }
+            },
+        	<% }% >componente: {
                 files: 'public/html/**/*.spec.js',
-                tasks: [ 'specAPoly' ],
+                tasks: [ 'newer:specAPoly' ],
                 options: {
                     nospawn: false
                 }
             }
-        },
+        },<% if ( usoSass === true ) { %>
         sass: {
             desarrollo: {
                 options: {
@@ -30,7 +38,15 @@ module.exports = function (grunt) {
                 src: 'public/html/**/*.scss',
                 ext: '.css'
             }
-        },
+        },<% } %><% if ( usoCoffeeScript === true ) { %>
+        coffee: {
+            options: {
+                bare: true                
+            },
+            expand: true,
+            src: 'public/html/**/*.coffee',
+            ext: '.js'
+        },<% } %>
         copy: {
             distribucion: {
                 files: [
@@ -145,19 +161,23 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-clean');
 
-    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-watch');<% if ( usoSass === true ) { %>
     grunt.loadNpmTasks('grunt-contrib-sass');
+    <% } %><% if ( usoCoffeeScript === true ) { %>
+    grunt.loadNpmTasks('grunt-contrib-coffee');
+    <% } %>grunt.loadNpmTasks('grunt-newer');
 
-    grunt.registerTask('default', ['watch' ]);
+    grunt.registerTask('default', [ 'watch' ]);
 
-    grunt.registerTask('build', [
-        'specAPoly:build',
+    grunt.registerTask('build', [<% if ( usoCoffeeScript === true ) { %>
+        'coffee',
+        <% } %>'specAPoly:build',
         'clean:precopy',
         'copy',
         'clean:postcopy',
-        'uglify:public',
+        'uglify:public',<% if ( usoSass === true ) { %>
         'sass',
-        'cssmin',
+        <% } %>'cssmin',
         'polyconcat',
         'htmlmin',
         'clean:build',
