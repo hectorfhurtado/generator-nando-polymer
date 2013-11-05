@@ -49,7 +49,6 @@ NandoPolymerGenerator.prototype.askFor = function askFor() {
         this.puerto		= props.puerto;
         this.customTag  = props.customTag;
         this.usoSass    = props.usoSass;
-        // this.usoCoffeeScript = props.usoCoffeeScript;
 
         cb();
     }.bind(this));

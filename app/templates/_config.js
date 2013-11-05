@@ -1,5 +1,6 @@
 {
     "name": "<%= nombreApp %>",
     "autor": "<%= autor %>",
-    "customTag": "<%= customTag %>"
+    "customTag": "<%= customTag %>",
+    "usoSass": "<%= usoSass %>"
 }

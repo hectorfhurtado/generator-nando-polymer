@@ -61,10 +61,14 @@ ComponenteGenerator.prototype.files = function files() {
     var configParams = JSON.parse( this.read( path.join( pathEsteDirectorio, '/config.js' )));
     this.autor       = configParams.autor;
     this.customTag   = configParams.customTag;
+    this.usoSass     = configParams.usoSass;
     
     this.mkdir( this.componente );
 
-	this.template( 'archivo.scss', 		this.componente + '/' + this.componente + '.scss' );
+    if ( this.usoSass === true ) {
+        this.template( 'archivo.scss', 	this.componente + '/' + this.componente + '.scss' );
+    }
+	
     this.template( 'archivo.css', 		this.componente + '/' + this.componente + '.css' );
 	this.template( 'archivo.js', 		this.componente + '/' + this.componente + '.js' );
     this.template( 'archivo.html', 		this.componente + '/' + this.componente + '.html' );
