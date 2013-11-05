@@ -12,7 +12,7 @@ module.exports = function (grunt) {
                     nospawn: true
                 }
             },
-            <% }% >componente: {
+            <% } %>componente: {
                 files: 'public/html/**/*.spec.js',
                 tasks: [ 'newer:specAPoly' ],
                 options: {
