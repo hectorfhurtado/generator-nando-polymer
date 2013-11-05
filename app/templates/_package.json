@@ -5,8 +5,7 @@
   "scripts": {
     "start": "nodemon app.js"
   },
-  "dependencies": {
-    <% if( puerto ) { %>
+  "dependencies": {<% if( puerto ) { %>
     "express": "latest",
     "socket.io": "latest"
     <% } %>
@@ -20,7 +19,6 @@
     "grunt-contrib-htmlmin": "latest",
     "grunt-contrib-clean": "latest",
     <% if ( usoSass === true ) { %>"grunt-contrib-sass": "latest", <% } %>
-    <% if ( usoCoffeeScript === true ) { %>"grunt-contrib-coffee": "latest", <% } %>
     "jasmine-node": "latest",
     "grunt-newer": "latest"
   }

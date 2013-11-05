@@ -12,15 +12,7 @@ module.exports = function (grunt) {
                     nospawn: true
                 }
             },
-            <% }% ><% if ( usoCoffeeScript === true ) { %>
-        	coffee: {
-                files: 'public/html/**/*.coffee',
-                tasks: [ 'newer:coffee' ],
-                options: {
-                    nospawn: true
-                }
-            },
-        	<% }% >componente: {
+            <% }% >componente: {
                 files: 'public/html/**/*.spec.js',
                 tasks: [ 'newer:specAPoly' ],
                 options: {
@@ -38,14 +30,6 @@ module.exports = function (grunt) {
                 src: 'public/html/**/*.scss',
                 ext: '.css'
             }
-        },<% } %><% if ( usoCoffeeScript === true ) { %>
-        coffee: {
-            options: {
-                bare: true                
-            },
-            expand: true,
-            src: 'public/html/**/*.coffee',
-            ext: '.js'
         },<% } %>
         copy: {
             distribucion: {
@@ -163,15 +147,12 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-watch');<% if ( usoSass === true ) { %>
     grunt.loadNpmTasks('grunt-contrib-sass');
-    <% } %><% if ( usoCoffeeScript === true ) { %>
-    grunt.loadNpmTasks('grunt-contrib-coffee');
     <% } %>grunt.loadNpmTasks('grunt-newer');
 
     grunt.registerTask('default', [ 'watch' ]);
 
-    grunt.registerTask('build', [<% if ( usoCoffeeScript === true ) { %>
-        'coffee',
-        <% } %>'specAPoly:build',
+    grunt.registerTask('build', [
+        'specAPoly:build',
         'clean:precopy',
         'copy',
         'clean:postcopy',

@@ -39,11 +39,6 @@ NandoPolymerGenerator.prototype.askFor = function askFor() {
         message: 'Vas a usar Sass en tu proyecto',
         default: false
     }, {
-        type: 'confirm',
-        name: 'usoCoffeeScript',
-        message: 'Vas a usar CoffeeScript en tu proyecto',
-        default: false
-    }, {
         name: 'puerto',
         message: 'Si tu aplicación va a usar un servidor con socket.io, escribe el puerto del servidor'
     }];
@@ -54,7 +49,7 @@ NandoPolymerGenerator.prototype.askFor = function askFor() {
         this.puerto		= props.puerto;
         this.customTag  = props.customTag;
         this.usoSass    = props.usoSass;
-        this.usoCoffeeScript = props.usoCoffeeScript;
+        // this.usoCoffeeScript = props.usoCoffeeScript;
 
         cb();
     }.bind(this));
@@ -79,14 +74,18 @@ NandoPolymerGenerator.prototype.app = function app() {
     this.template('index.html', 'public/html/index.html');
     
     if ( this.puerto ) {
-    	this.template('app.js', 'app.js');
+		this.template('app.js', 'app.js');
     }
 
     this.copy( 'tareas/polyconcat.js', 'tareas/polyconcat.js' );
     this.copy( 'tareas/specAPoly.js', 'tareas/specAPoly.js' );
     
 	this.template( 'archivo.spec.js', 'public/html/' + this.componente + '/' + this.componente + '.spec.js' );
-    this.template( 'archivo.scss', 'public/html/' + this.componente + '/' + this.componente + '.scss' );
+    
+    if ( this.usoSass ) {
+        this.template( 'archivo.scss', 'public/html/' + this.componente + '/' + this.componente + '.scss' );
+    }
+
     this.template( 'archivo.css', 'public/html/' + this.componente + '/' + this.componente + '.css' );
 	this.template( 'archivo.js', 'public/html/' + this.componente + '/' + this.componente + '.js' );
     this.template( 'archivo.html', 'public/html/' + this.componente + '/' + this.componente + '.html' );
