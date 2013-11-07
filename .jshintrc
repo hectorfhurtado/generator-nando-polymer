@@ -1,0 +1,23 @@
+{
+	"curly"		: true,
+    "eqeqeq"	: true,
+    "immed"		: true,
+    "nonew"		: true,
+    "quotmark"	: "single",
+    "undef"		: true,
+    "unused"	: true,
+    "indent"	: 4,
+    "trailing"	: true,
+    "maxparams"	: 5,
+    "maxdepth"	: 7,
+    
+    "asi"		: true,
+    "debug"		: true,
+    "smarttabs"	: true,
+    "sub"		: true,
+    
+    "browser"	: true,
+    "node"		: true,
+    
+    "globals": {}
+}

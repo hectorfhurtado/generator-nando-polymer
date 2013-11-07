@@ -1,4 +1,4 @@
-'use strict';
+
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
@@ -67,7 +67,6 @@ NandoPolymerGenerator.prototype.app = function app() {
 
     this.template('_package.json', 'package.json');
     this.template('_bower.json', 'public/bower.json');
-    this.template('_config.rb', 'config.rb');
     this.template('_config.js', 'config.js');
     this.template('Gruntfile.js', 'gruntfile.js');
     this.template('index.html', 'public/html/index.html');
@@ -79,12 +78,13 @@ NandoPolymerGenerator.prototype.app = function app() {
     this.copy( 'tareas/polyconcat.js', 'tareas/polyconcat.js' );
     this.copy( 'tareas/specAPoly.js', 'tareas/specAPoly.js' );
     
-	this.template( 'archivo.spec.js', 'public/html/' + this.componente + '/' + this.componente + '.spec.js' );
-    
     if ( this.usoSass ) {
+        this.template('_config.rb', 'config.rb');
         this.template( 'archivo.scss', 'public/html/' + this.componente + '/' + this.componente + '.scss' );
     }
-
+    
+	this.template( 'archivo.spec.js', 'public/html/' + this.componente + '/' + this.componente + '.spec.js' );
+    
     this.template( 'archivo.css', 'public/html/' + this.componente + '/' + this.componente + '.css' );
 	this.template( 'archivo.js', 'public/html/' + this.componente + '/' + this.componente + '.js' );
     this.template( 'archivo.html', 'public/html/' + this.componente + '/' + this.componente + '.html' );
@@ -94,7 +94,7 @@ NandoPolymerGenerator.prototype.app = function app() {
         console.log( 'stderr: ' + stderr );
 
         if ( error !== null ) {
-        	console.log( 'exec error: ' + error );
+			console.log( 'exec error: ' + error );
         }
     });
 };

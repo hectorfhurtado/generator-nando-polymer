@@ -1,13 +1,10 @@
-/* global require, module */
 
-'use strict';
+var util	= require( 'util' );
+var path	= require( 'path' );
+var fs		= require( 'fs' );
+var yeoman	= require('yeoman-generator');
 
-var util = require('util');
-var path = require('path');
-var fs   = require( 'fs' );
-var yeoman = require('yeoman-generator');
-
-var ComponenteGenerator = module.exports = function ComponenteGenerator(args, options, config) {
+var ComponenteGenerator = module.exports = function ComponenteGenerator( args, options, config ) {
     // By calling `NamedBase` here, we get the argument to the subgenerator call
     // as `this.name`.
     yeoman.generators.NamedBase.apply(this, arguments);
@@ -41,7 +38,7 @@ ComponenteGenerator.prototype.askFor = function askFor() {
 
 ComponenteGenerator.prototype.files = function files() {
     this.componente = this.name;
-    this.componenteSlugish = this.name.replace( /([A-Z])/g, "-$1" ).toLowerCase();
+    this.componenteSlugish = this.name.replace( /([A-Z])/g, '-$1' ).toLowerCase();
     this.componenteCapitalize = this.name[ 0 ].toUpperCase() + this.name.slice( 1 );
     this.hoy = new Date();
     
@@ -66,14 +63,14 @@ ComponenteGenerator.prototype.files = function files() {
     this.mkdir( this.componente );
 
     if ( this.usoSass === true ) {
-        this.template( 'archivo.scss', 	this.componente + '/' + this.componente + '.scss' );
+		this.template( 'archivo.scss',	this.componente + '/' + this.componente + '.scss' );
     }
 	
-    this.template( 'archivo.css', 		this.componente + '/' + this.componente + '.css' );
-	this.template( 'archivo.js', 		this.componente + '/' + this.componente + '.js' );
-    this.template( 'archivo.html', 		this.componente + '/' + this.componente + '.html' );
-    this.template( 'archivo.spec.js', 	this.componente + '/' + this.componente + '.spec.js' );
-    this.template( 'archivo.spec.html', this.componente + '/' + this.componente + '.spec.html' );
+	this.template( 'archivo.css',		this.componente + '/' + this.componente + '.css' );
+	this.template( 'archivo.js',		this.componente + '/' + this.componente + '.js' );
+    this.template( 'archivo.html',		this.componente + '/' + this.componente + '.html' );
+    this.template( 'archivo.spec.js',	this.componente + '/' + this.componente + '.spec.js' );
+    this.template( 'archivo.spec.html',	this.componente + '/' + this.componente + '.spec.html' );
     
     // si vamos a agregar el componente a otro, vamos mirando dónde lo agregamos
     if ( this.pathComponente ) {
