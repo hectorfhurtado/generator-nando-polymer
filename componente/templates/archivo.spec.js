@@ -7,7 +7,7 @@ var <%= componenteCapitalize %>= {
 	// TODO
 };
     
-describe( 'Componente ' <%= componente %>, function() {
+describe( 'Componente <%= componente %>', function() {
     var <%= componente %>;
     
     beforeEach( function() {
