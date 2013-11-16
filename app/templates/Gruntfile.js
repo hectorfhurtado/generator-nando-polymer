@@ -5,14 +5,14 @@ module.exports = function (grunt) {
         watch: {<% if ( usoSass === true ) { %>
             css: {
                 files: 'public/html/**/*.scss',
-                tasks: [ 'newer:sass' ],
+                tasks: [ 'newer:sass', 'sass' ],
                 options: {
                     nospawn: true
                 }
             },
             <% } %>componente: {
                 files: 'public/html/**/*.spec.js',
-                tasks: [ 'newer:specAPoly' ],
+                tasks: [ 'newer:specAPoly', 'sass' ],
                 options: {
                     nospawn: false
                 }
