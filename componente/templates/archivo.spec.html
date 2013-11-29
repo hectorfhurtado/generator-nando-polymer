@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="../../bower_components/polymer/polymer.min.js"></script>
+    <script src="../../bower_components/platform/platform.js"></script>
+    <link href="../../bower_components/polymer/polymer.html" rel="import">
 </head>
 <body>
     <!--
@@ -10,7 +11,7 @@
      * @version	<%= hoy.getFullYear() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getDate() %>
      */
 	-->
-    <link href="<%= componente %>.html" rel="import">\n' +
+    <link href="<%= componente %>.html" rel="import">
     <polymer-element name="prueba-<%= componenteSlugish %>">
         <template>
             <style>
