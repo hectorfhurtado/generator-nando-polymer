@@ -12,7 +12,7 @@ module.exports = function (grunt) {
             },
             <% } %>componente: {
                 files: 'public/html/**/*.spec.js',
-                tasks: [ 'newer:specAPoly', 'sass' ],
+                tasks: [ 'newer:specAPoly', 'specAPoly' ],
                 options: {
                     nospawn: false
                 }
@@ -34,7 +34,17 @@ module.exports = function (grunt) {
                 files: [
                     {
                         expand: true,
-                        src: 'public/bower_components/polymer/polymer.min.js',
+                        src: 'public/bower_components/platform/platform.js',
+                        dest: 'dist/'
+                    },
+                    {
+                        expand: true,
+                        src: 'public/bower_components/polymer/polymer.js',
+                        dest: 'dist/'
+                    },
+                    {
+                        expand: true,
+                        src: 'public/bower_components/polymer/polymer.html',
                         dest: 'dist/'
                     },
                     {
@@ -159,7 +169,6 @@ module.exports = function (grunt) {
         <% } %>'cssmin',
         'polyconcat',
         'htmlmin',
-        'clean:build',
-        'cambioString'
+        'clean:build'
     ]);
 };
