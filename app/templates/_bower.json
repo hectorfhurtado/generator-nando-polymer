@@ -3,6 +3,7 @@
     "version": "0.0.0",
     "dependencies": {
         "jquery": "latest",
-        "polymer": "latest"
+        "platform": "Polymer/platform#latest",
+        "polymer": "Polymer/polymer#latest"
     }
 }
