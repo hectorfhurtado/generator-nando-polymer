@@ -76,7 +76,7 @@ To start polymerizing, on another terminal window type 'grunt' and start editing
     
 and everything will be concatenated, minified, copied, cleaned on root/dist/ folder.
 
-// TODO: add some videos
+Here is an [introduction video](https://www.youtube.com/watch?v=KIhIpqE_hZA). I'm better writing but I think Its explained how to use the generator and my workflow.
 
 ### To create a Component
 
@@ -92,10 +92,12 @@ Type path to the other component:		You must type relative path to the other comp
 
 You can check on when importing components that it's added a link to the created one.
 
+If you notice a file *.spec.html: this file is used to work in isolation on your component. You can pass objects, probe styles before adding it to your project. It conceived as a sandbox playground for testing your component alone.
+
 ### License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
-=======
+-------------------------------------------------------
 generator-nando-polymer
 =======================
 
