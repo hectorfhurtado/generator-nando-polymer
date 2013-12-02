@@ -55,6 +55,8 @@ ComponenteGenerator.prototype.files = function files() {
         }
     }
     
+    this.pathBower = path.relative( this.destinationRoot(), path.join( pathEsteDirectorio, '/public/bower_components' ))
+    
     var configParams = JSON.parse( this.read( path.join( pathEsteDirectorio, '/config.js' )));
     this.autor       = configParams.autor;
     this.customTag   = configParams.customTag;
