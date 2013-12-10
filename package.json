@@ -1,6 +1,6 @@
 {
   "name": "generator-nando-polymer",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "A Polymer generator for Yeoman",
   "keywords": [
     "yeoman-generator",

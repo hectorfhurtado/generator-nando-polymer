@@ -39,16 +39,28 @@ NandoPolymerGenerator.prototype.askFor = function askFor() {
         message: 'Vas a usar Sass en tu proyecto',
         default: false
     }, {
+        type: 'confirm',
+        name: 'usoVulcanizer',
+        message: 'Vas a usar vulcanizer para crear un sólo archivo?',
+        default: false
+    }, {
+        type: 'confirm',
+        name: 'esChromeApp',
+        message: 'Creas una Chrome App?',
+        default: false
+    }, {
         name: 'puerto',
         message: 'Si tu aplicación va a usar un servidor con socket.io, escribe el puerto del servidor'
     }];
 
     this.prompt(prompts, function (props) {
-		this.nombreApp	= props.nombreApp;
-        this.autor		= props.autor;
-        this.puerto		= props.puerto;
-        this.customTag  = props.customTag;
-        this.usoSass    = props.usoSass;
+		this.nombreApp	    = props.nombreApp;
+        this.autor		    = props.autor;
+        this.puerto		    = props.puerto;
+        this.customTag      = props.customTag;
+        this.usoSass        = props.usoSass;
+        this.usoVulcanizer  = props.usoVulcanizer;
+        this.esChromeApp    = props.esChromeApp;
 
         cb();
     }.bind(this));
@@ -69,14 +81,52 @@ NandoPolymerGenerator.prototype.app = function app() {
     this.template('_bower.json', 'public/bower.json');
     this.template('_config.js', 'config.js');
     this.template('Gruntfile.js', 'gruntfile.js');
-    this.template('index.html', 'public/html/index.html');
     
     if ( this.puerto ) {
 		this.template('app.js', 'app.js');
     }
 
-    this.copy( 'tareas/polyconcat.js', 'tareas/polyconcat.js' );
+    if ( this.usoVulcanizer === false ) {
+		this.copy( 'tareas/polyconcat.js', 'tareas/polyconcat.js' );
+    }
+    
     this.copy( 'tareas/specAPoly.js', 'tareas/specAPoly.js' );
+    
+    if ( this.puerto && this.esChromeApp ) {
+        this.mkdir( 'public/dist/socket.io-client' )
+        this.mkdir( 'public/dist/socket.io-client/dist' )
+        this.mkdir( 'public/dist/socket.io-client/lib' )
+        this.mkdir( 'public/dist/socket.io-client/lib/transports' )
+        
+        this.copy( 'socket.io-client/dist/socket.io.min.js', 'public/dist/socket.io-client/dist/socket.io.min.js' )
+        this.copy( 'socket.io-client/dist/WebSocketMain.swf', 'public/dist/socket.io-client/dist/WebSocketMain.swf' )
+        this.copy( 'socket.io-client/dist/WebSocketMainInsecure.swf', 'public/dist/socket.io-client/dist/WebSocketMainInsecure.swf' )
+        this.copy( 'socket.io-client/lib/events.js', 'public/dist/socket.io-client/lib/events.js' )
+        this.copy( 'socket.io-client/lib/io.js', 'public/dist/socket.io-client/lib/io.js' )
+        this.copy( 'socket.io-client/lib/json.js', 'public/dist/socket.io-client/lib/json.js' )
+        this.copy( 'socket.io-client/lib/namespace.js', 'public/dist/socket.io-client/lib/namespace.js' )
+        this.copy( 'socket.io-client/lib/parser.js', 'public/dist/socket.io-client/lib/parser.js' )
+        this.copy( 'socket.io-client/lib/socket.js', 'public/dist/socket.io-client/lib/socket.js' )
+        this.copy( 'socket.io-client/lib/transport.js', 'public/dist/socket.io-client/lib/transport.js' )
+        this.copy( 'socket.io-client/lib/util.js', 'public/dist/socket.io-client/lib/util.js' )
+        this.copy( 'socket.io-client/lib/transports/flashsocket.js', 'public/dist/socket.io-client/lib/transports/flashsocket.js' )
+        this.copy( 'socket.io-client/lib/transports/htmlfile.js', 'public/dist/socket.io-client/lib/transports/htmlfile.js' )
+        this.copy( 'socket.io-client/lib/transports/json-polling.js', 'public/dist/socket.io-client/lib/transports/json-polling.js' )
+        this.copy( 'socket.io-client/lib/transports/websocket.js', 'public/dist/socket.io-client/lib/transports/websocket.js' )
+        this.copy( 'socket.io-client/lib/transports/xhr.js', 'public/dist/socket.io-client/lib/transports/xhr.js' )
+        this.copy( 'socket.io-client/lib/transports/xhr-polling.js', 'public/dist/socket.io-client/lib/transports/xhr-polling.js' )
+    }
+    
+    if ( this.esChromeApp ) {
+        this.template( 'manifest.json', 'public/dist/manifest.json' )
+        this.template( 'background.js', 'public/dist/background.js' )
+        this.template( 'build.js',      'public/dist/build.js' )
+        this.template( 'build.js',      'public/dist/index.js' )
+        this.template( 'build.html',    'public/dist/build.html' )
+    }
+    else {
+		this.template('index.html', 'public/html/index.html');
+    }
     
     if ( this.usoSass ) {
         this.template('_config.rb', 'config.rb');

@@ -1,0 +1,17 @@
+{
+    "name": "<%= _.slugify(nombreApp) %>",
+    "description": "<%= _.slugify(nombreApp) %>",
+    "version": "0.0.1",
+    "app": {
+        "background": {
+            "scripts": [ "background.js" ]
+        }
+    },
+    "permissions": [ <% if ( puerto ) { %>
+        "http://localhost:<%= puerto %>/*"<% } %>
+    ],
+    "manifest_version": 2,
+    "sandbox": {
+        "pages": []
+    }
+}

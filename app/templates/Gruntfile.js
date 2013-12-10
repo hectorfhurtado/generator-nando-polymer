@@ -87,14 +87,14 @@ module.exports = function (grunt) {
                 src     : 'dist/public/html/**/*.css'
             }
         },
-
+<% if ( usoVulcanizer === false ) { %>
         polyconcat: {
             unity: {
                 expand  : true,
                 src     : 'dist/public/html/**/*.html'
             }
         },
-
+<% } %>
         htmlmin : {
             build: {
                 options : {
@@ -137,7 +137,13 @@ module.exports = function (grunt) {
                 ]
             }
         },
-
+<% if ( usoVulcanizer ) { %>
+    	vulcanize: {
+            src : 'public/html/index.html',
+            dest: 'public/dist/build.html',
+            csp: <%= esChromeApp %>
+        },
+<% } %>
         specAPoly: {
             build: {
                 expand: true,
@@ -166,9 +172,10 @@ module.exports = function (grunt) {
         'clean:postcopy',
         'uglify:public',<% if ( usoSass === true ) { %>
         'sass',
-        <% } %>'cssmin',
+        <% } %>'cssmin',<% if ( usoVulcanizer === false ) { %>
         'polyconcat',
-        'htmlmin',
-        'clean:build'
+        <% } %>'htmlmin',<% if ( usoVulcanizer === true ) { %>
+        'vulcanize',
+        <% } %>'clean:build'
     ]);
 };

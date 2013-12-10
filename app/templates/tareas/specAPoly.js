@@ -17,7 +17,7 @@ module.exports = function( grunt ) {
 
         // Le agrega un '0' al número ingresado en caso de que sea menor a 10. Se espera un entero positivo
         function formatearNumero( numero ) {
-            return ( numero < 10 ) ? "0" + numero : numero;
+            return ( numero < 10 ) ? '0' + numero : numero;
         }
 
         /**
