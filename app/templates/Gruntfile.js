@@ -10,7 +10,8 @@ module.exports = function (grunt) {
                     nospawn: true
                 }
             },
-            <% } %>componente: {
+            <% } %>
+            componente: {
                 files: 'public/html/**/*.spec.js',
                 tasks: [ 'newer:specAPoly', 'specAPoly' ],
                 options: {
@@ -161,7 +162,8 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-watch');<% if ( usoSass === true ) { %>
     grunt.loadNpmTasks('grunt-contrib-sass');
-    <% } %>grunt.loadNpmTasks('grunt-newer');
+    <% } %>
+    grunt.loadNpmTasks('grunt-newer');
 
     grunt.registerTask('default', [ 'watch' ]);
 
@@ -172,10 +174,12 @@ module.exports = function (grunt) {
         'clean:postcopy',
         'uglify:public',<% if ( usoSass === true ) { %>
         'sass',
-        <% } %>'cssmin',<% if ( usoVulcanizer === false ) { %>
+        <% } %>
+        'cssmin',<% if ( usoVulcanizer === false ) { %>
         'polyconcat',
         <% } %>'htmlmin',<% if ( usoVulcanizer === true ) { %>
         'vulcanize',
-        <% } %>'clean:build'
+        <% } %>
+        'clean:build'
     ]);
 };

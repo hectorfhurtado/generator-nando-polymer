@@ -47,6 +47,9 @@ NandoPolymerGenerator.prototype.askFor = function askFor() {
         type: 'confirm',
         name: 'esChromeApp',
         message: 'Creas una Chrome App?',
+        when: function( respuestas ) {
+            return respuestas.usoVulcanizer === true
+        },
         default: false
     }, {
         name: 'puerto',
@@ -60,7 +63,7 @@ NandoPolymerGenerator.prototype.askFor = function askFor() {
         this.customTag      = props.customTag;
         this.usoSass        = props.usoSass;
         this.usoVulcanizer  = props.usoVulcanizer;
-        this.esChromeApp    = props.esChromeApp;
+        this.esChromeApp    = props.esChromeApp || false;
 
         cb();
     }.bind(this));
