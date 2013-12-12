@@ -3,14 +3,14 @@
     <head>
         <script src='../bower_components/platform/platform.js'></script><% if( puerto ) { %>
         <script src="/socket.io/socket.io.js" ></script>
-        
-        <% } %><link rel="import" href="<%= nombreApp %>/<%= nombreApp %>.html" >
+        <% } %>
+        <link rel="import" href="<% if ( puerto ) { %>html/<% } %><%= nombreApp %>/<%= nombreApp %>.html" >
 
         <title><%= _.capitalize(nombreApp) %></title>
 
     </head>
     <body>
-        <<%= customTag %>-<%= _.slugify(nombreApp) %>></<%= customTag %>-<%= _.slugify(nombreApp) %>>
+        <<%= customTag %>-<%= componenteSlugish %>></<%= customTag %>-<%= componenteSlugish %>>
         <% if ( esChromeApp ) { %>
         <script src="index.js"></script>
         <% } else { %>

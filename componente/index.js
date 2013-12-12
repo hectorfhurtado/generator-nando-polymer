@@ -16,15 +16,15 @@ ComponenteGenerator.prototype.askFor = function askFor() {
     var cb = this.async();
     
     var prompts = [{
-        type: 'confirm',
-        name: 'import',
+        type   : 'confirm',
+        name   : 'import',
         message: 'Importar este a otro componente (N))?',
         default: false
     }, {
-        type: 'input',
-        name: 'pathComponente',
+        type   : 'input',
+        name   : 'pathComponente',
         message: 'Escribe el path del componente',
-        when: function( respuestas ) {
+        when   : function( respuestas ) {
             return respuestas.import === true ;
         }
     }];
@@ -37,13 +37,13 @@ ComponenteGenerator.prototype.askFor = function askFor() {
 };
 
 ComponenteGenerator.prototype.files = function files() {
-    this.componente = this.name;
-    this.componenteSlugish = this.name.replace( /([A-Z])/g, '-$1' ).toLowerCase();
+    this.componente           = this.name;
+    this.componenteSlugish    = this.name.replace( /([A-Z])/g, '-$1' ).toLowerCase();
     this.componenteCapitalize = this.name[ 0 ].toUpperCase() + this.name.slice( 1 );
-    this.hoy = new Date();
+    this.hoy                  = new Date();
     
-    var encontrado = false;
-    var pathEsteDirectorio = this.destinationRoot();
+    var encontrado            = false;
+    var pathEsteDirectorio    = this.destinationRoot();
 
     while( encontrado === false ) {
         
@@ -76,12 +76,12 @@ ComponenteGenerator.prototype.files = function files() {
     
     // si vamos a agregar el componente a otro, vamos mirando dónde lo agregamos
     if ( this.pathComponente ) {
-        var esteDirectorio = this.destinationRoot();
-        var pathArchivo = null;
+        var esteDirectorio   = this.destinationRoot();
+        var pathArchivo      = null;
         var contenidoArchivo = null;
         
-        pathArchivo = path.resolve( esteDirectorio, './' + this.pathComponente );
-        pathArchivo = fs.existsSync( pathArchivo ) ? pathArchivo : null;
+        pathArchivo          = path.resolve( esteDirectorio, './' + this.pathComponente );
+        pathArchivo          = fs.existsSync( pathArchivo ) ? pathArchivo : null;
         
         if ( pathArchivo ) {
             var pathRelativo = path.relative( path.dirname( pathArchivo ), path.join( esteDirectorio, '/' + this.componente + '/' + this.componente + '.html' ));

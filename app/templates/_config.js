@@ -1,6 +1,8 @@
 {
-    "name": "<%= nombreApp %>",
-    "autor": "<%= autor %>",
-    "customTag": "<%= customTag %>",
-    "usoSass": <%= usoSass %>
+    "name"         : "<%= nombreApp %>",
+    "autor"        : "<%= autor %>",
+    "customTag"    : "<%= customTag %>",
+    "usoSass"      : <%= usoSass %>,
+    "usoVulcanizer": <%= usoVulcanizer %>,
+    "esChromeApp"  : <%= esChromeApp %>
 }
