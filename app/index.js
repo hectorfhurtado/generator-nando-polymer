@@ -92,6 +92,9 @@ NandoPolymerGenerator.prototype.app = function app() {
     if ( this.usoVulcanizer === false ) {
 		this.copy( 'tareas/polyconcat.js', 'tareas/polyconcat.js' );
     }
+    else {
+        this.copy( 'tareas/vulcanize.js',  'tareas/vulcanize.js'  );
+    }
     
     this.copy( 'tareas/specAPoly.js', 'tareas/specAPoly.js' );
     

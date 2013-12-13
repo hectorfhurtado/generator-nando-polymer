@@ -144,7 +144,7 @@ module.exports = function (grunt) {
         },
 <% if ( usoVulcanizer ) { %>
     	vulcanize: {
-            src : 'public/html/index.html',
+            src : 'public/index.html',
             dest: 'public/dist/build.html',
             csp: <%= esChromeApp %>
         },
