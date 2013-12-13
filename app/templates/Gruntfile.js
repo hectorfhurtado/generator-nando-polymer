@@ -49,6 +49,10 @@ module.exports = function (grunt) {
                         dest: 'dist/'
                     },
                     {
+                        src: 'public/index.html',
+                        dest: 'dist/'
+                    },
+                    {
                         expand: true,
                         src: 'public/html/**',
                         dest: 'dist/'

@@ -8,7 +8,7 @@ module.exports = function( grunt ) {
     grunt.register( 'vulcanize', 'Corre Vulcanizer', function() {
         
         var opciones = this.options({
-            src: 'public/html/index.html',
+            src: 'public/index.html',
             dest: 'public/dist/build.html',
             csp: false
         });

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <script src='../bower_components/platform/platform.js'></script><% if( puerto ) { %>
+        <script src='bower_components/platform/platform.js'></script><% if( puerto ) { %>
         <script src="/socket.io/socket.io.js" ></script>
         <% } %>
-        <link rel="import" href="<% if ( puerto ) { %>html/<% } %><%= nombreApp %>/<%= nombreApp %>.html" >
+        <link rel="import" href="html/<%= nombreApp %>/<%= nombreApp %>.html" >
 
         <title><%= _.capitalize(nombreApp) %></title>
 

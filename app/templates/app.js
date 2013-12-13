@@ -28,22 +28,9 @@ app.configure( 'development', function() {
 });
 
 // rutas
-// app.get( '/', routes.index );
-app.get( '/', function( req, res ) {
-    res.sendfile( path.join( __dirname + '/public/html/index.html' ));
-});
-
-app.get( /^\/public\/html(?:\/html)?(\/.*)$/, function( req, res ) {
-    res.sendfile( path.join( __dirname + '/public/html' + req.params[ 0 ]));
-});
-
-app.get( /^\/public\/js(\/.*)$/, function( req, res ) {
-    res.sendfile( path.join( __dirname + '/public/js' + req.params[ 0 ]));
-});
-
-app.get( /^\/public\/bower_components(\/.*)$/, function( req, res ) {
-    res.sendfile( path.join( __dirname + '/public/bower_components' + req.params[ 0 ]));
-});
+app.get( /^\/public(.*)$/, function( req, res ) {
+    res.sendfile( path.join( __dirname + '/public' + req.params[ 0 ]))
+})
 
 // inicio de Express
 app         = http.createServer( app ).listen( <%= puerto %> );

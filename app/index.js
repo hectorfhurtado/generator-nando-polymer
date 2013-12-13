@@ -128,7 +128,7 @@ NandoPolymerGenerator.prototype.app = function app() {
         this.template( 'build.html',    'public/dist/build.html' )
     }
     else {
-		this.template('index.html', 'public/html/index.html');
+		this.template('index.html', 'public/index.html');
     }
     
     if ( this.usoSass ) {
