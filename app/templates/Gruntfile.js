@@ -92,14 +92,12 @@ module.exports = function (grunt) {
                 src     : 'dist/public/html/**/*.css'
             }
         },
-<% if ( usoVulcanizer === false ) { %>
         polyconcat: {
             unity: {
                 expand  : true,
                 src     : 'dist/public/html/**/*.html'
             }
         },
-<% } %>
         htmlmin : {
             build: {
                 options : {
@@ -137,16 +135,30 @@ module.exports = function (grunt) {
                     'dist/public/html/**/*.js',
                     'dist/public/html/**/*.css',
                     'dist/public/html/**/*.scss',
-                    'dist/public/html/**/*.map',
+                    'dist/public/html/**/*.map',<% if ( usoVulcanizer ) { %>
+                    'dist/public/html/**/*.html',
+                    'dist/public/index.html',<% } %>
                     'dist/**/*.txt'
                 ]
             }
         },
 <% if ( usoVulcanizer ) { %>
     	vulcanize: {
-            src : 'public/index.html',
-            dest: 'public/dist/build.html',
-            csp: <%= esChromeApp %>
+            build: {
+                options: {
+                    <% if ( esChromeApp ) { %>csp: true<% } %>
+                    <% if ( esChromeApp === false ) { %>inline: true<% } %>
+                },
+                files: {
+                    'dist/public/build.html': 'dist/public/index.html'
+                }    
+            }
+        },
+<% } %><% if ( esChromeApp && puerto ) { %>
+        cambioString: {
+            build: {
+                src: 'dist/public/index.html'
+            }
         },
 <% } %>
         specAPoly: {
@@ -166,6 +178,8 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-watch');<% if ( usoSass === true ) { %>
     grunt.loadNpmTasks('grunt-contrib-sass');
+    <% } %><% if ( usoVulcanizer ) { %>
+    grunt.loadNpmTasks('grunt-vulcanize');
     <% } %>
     grunt.loadNpmTasks('grunt-newer');
 
@@ -177,13 +191,12 @@ module.exports = function (grunt) {
         'copy',
         'clean:postcopy',
         'uglify:public',<% if ( usoSass === true ) { %>
-        'sass',
-        <% } %>
-        'cssmin',<% if ( usoVulcanizer === false ) { %>
-        'polyconcat',
-        <% } %>'htmlmin',<% if ( usoVulcanizer === true ) { %>
-        'vulcanize',
-        <% } %>
+        'sass',<% } %>
+        'cssmin',
+        'polyconcat',<% if ( esChromeApp && puerto ) { %>
+        'cambioString',<% } %>
+        'htmlmin',<% if ( usoVulcanizer === true ) { %>
+        'vulcanize',<% } %>
         'clean:build'
     ]);
 };

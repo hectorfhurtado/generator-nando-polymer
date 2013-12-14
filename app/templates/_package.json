@@ -19,6 +19,7 @@
     "grunt-contrib-htmlmin": "latest",
     "grunt-contrib-clean": "latest",
     <% if ( usoSass === true ) { %>"grunt-contrib-sass": "latest", <% } %>
+    <% if ( usoVulcanizer ) { %>"grunt-vulcanize": "latest",<% } %>
     "jasmine-node": "latest",
     "grunt-newer": "latest"
   }

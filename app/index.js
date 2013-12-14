@@ -89,50 +89,47 @@ NandoPolymerGenerator.prototype.app = function app() {
 		this.template('app.js', 'app.js');
     }
 
-    if ( this.usoVulcanizer === false ) {
-		this.copy( 'tareas/polyconcat.js', 'tareas/polyconcat.js' );
-    }
-    else {
-        this.copy( 'tareas/vulcanize.js',  'tareas/vulcanize.js'  );
+    if ( this.esChromeApp && this.puerto ) {
+		this.copy( 'tareas/cambioString.js', 'tareas/cambioString.js' );
     }
     
-    this.copy( 'tareas/specAPoly.js', 'tareas/specAPoly.js' );
+    this.copy( 'tareas/polyconcat.js', 'tareas/polyconcat.js' );
+    this.copy( 'tareas/specAPoly.js',  'tareas/specAPoly.js' );
     
     if ( this.puerto && this.esChromeApp ) {
-        this.mkdir( 'public/dist/socket.io-client' )
-        this.mkdir( 'public/dist/socket.io-client/dist' )
-        this.mkdir( 'public/dist/socket.io-client/lib' )
-        this.mkdir( 'public/dist/socket.io-client/lib/transports' )
+        this.mkdir( 'dist/public/socket.io-client' )
+        this.mkdir( 'dist/public/socket.io-client/dist' )
+        this.mkdir( 'dist/public/socket.io-client/lib' )
+        this.mkdir( 'dist/public/socket.io-client/lib/transports' )
         
-        this.copy( 'socket.io-client/dist/socket.io.min.js',          'public/dist/socket.io-client/dist/socket.io.min.js' )
-        this.copy( 'socket.io-client/dist/WebSocketMain.swf',         'public/dist/socket.io-client/dist/WebSocketMain.swf' )
-        this.copy( 'socket.io-client/dist/WebSocketMainInsecure.swf', 'public/dist/socket.io-client/dist/WebSocketMainInsecure.swf' )
-        this.copy( 'socket.io-client/lib/events.js',                  'public/dist/socket.io-client/lib/events.js' )
-        this.copy( 'socket.io-client/lib/io.js',                      'public/dist/socket.io-client/lib/io.js' )
-        this.copy( 'socket.io-client/lib/json.js',                    'public/dist/socket.io-client/lib/json.js' )
-        this.copy( 'socket.io-client/lib/namespace.js',               'public/dist/socket.io-client/lib/namespace.js' )
-        this.copy( 'socket.io-client/lib/parser.js',                  'public/dist/socket.io-client/lib/parser.js' )
-        this.copy( 'socket.io-client/lib/socket.js',                  'public/dist/socket.io-client/lib/socket.js' )
-        this.copy( 'socket.io-client/lib/transport.js',               'public/dist/socket.io-client/lib/transport.js' )
-        this.copy( 'socket.io-client/lib/util.js',                    'public/dist/socket.io-client/lib/util.js' )
-        this.copy( 'socket.io-client/lib/transports/flashsocket.js',  'public/dist/socket.io-client/lib/transports/flashsocket.js' )
-        this.copy( 'socket.io-client/lib/transports/htmlfile.js',     'public/dist/socket.io-client/lib/transports/htmlfile.js' )
-        this.copy( 'socket.io-client/lib/transports/json-polling.js', 'public/dist/socket.io-client/lib/transports/json-polling.js' )
-        this.copy( 'socket.io-client/lib/transports/websocket.js',    'public/dist/socket.io-client/lib/transports/websocket.js' )
-        this.copy( 'socket.io-client/lib/transports/xhr.js',          'public/dist/socket.io-client/lib/transports/xhr.js' )
-        this.copy( 'socket.io-client/lib/transports/xhr-polling.js',  'public/dist/socket.io-client/lib/transports/xhr-polling.js' )
+        this.copy( 'socket.io-client/dist/socket.io.min.js',          'dist/public/socket.io-client/dist/socket.io.min.js' )
+        this.copy( 'socket.io-client/dist/WebSocketMain.swf',         'dist/public/socket.io-client/dist/WebSocketMain.swf' )
+        this.copy( 'socket.io-client/dist/WebSocketMainInsecure.swf', 'dist/public/socket.io-client/dist/WebSocketMainInsecure.swf' )
+        this.copy( 'socket.io-client/lib/events.js',                  'dist/public/socket.io-client/lib/events.js' )
+        this.copy( 'socket.io-client/lib/io.js',                      'dist/public/socket.io-client/lib/io.js' )
+        this.copy( 'socket.io-client/lib/json.js',                    'dist/public/socket.io-client/lib/json.js' )
+        this.copy( 'socket.io-client/lib/namespace.js',               'dist/public/socket.io-client/lib/namespace.js' )
+        this.copy( 'socket.io-client/lib/parser.js',                  'dist/public/socket.io-client/lib/parser.js' )
+        this.copy( 'socket.io-client/lib/socket.js',                  'dist/public/socket.io-client/lib/socket.js' )
+        this.copy( 'socket.io-client/lib/transport.js',               'dist/public/socket.io-client/lib/transport.js' )
+        this.copy( 'socket.io-client/lib/util.js',                    'dist/public/socket.io-client/lib/util.js' )
+        this.copy( 'socket.io-client/lib/transports/flashsocket.js',  'dist/public/socket.io-client/lib/transports/flashsocket.js' )
+        this.copy( 'socket.io-client/lib/transports/htmlfile.js',     'dist/public/socket.io-client/lib/transports/htmlfile.js' )
+        this.copy( 'socket.io-client/lib/transports/jsonp-polling.js','dist/public/socket.io-client/lib/transports/jsonp-polling.js' )
+        this.copy( 'socket.io-client/lib/transports/websocket.js',    'dist/public/socket.io-client/lib/transports/websocket.js' )
+        this.copy( 'socket.io-client/lib/transports/xhr.js',          'dist/public/socket.io-client/lib/transports/xhr.js' )
+        this.copy( 'socket.io-client/lib/transports/xhr-polling.js',  'dist/public/socket.io-client/lib/transports/xhr-polling.js' )
     }
     
     if ( this.esChromeApp ) {
-        this.template( 'manifest.json', 'public/dist/manifest.json' )
-        this.template( 'background.js', 'public/dist/background.js' )
-        this.template( 'build.js',      'public/dist/build.js' )
-        this.template( 'build.js',      'public/dist/index.js' )
-        this.template( 'build.html',    'public/dist/build.html' )
+        this.template( 'manifest.json', 'dist/public/manifest.json' )
+        this.template( 'background.js', 'dist/public/background.js' )
+        this.template( 'build.js',      'dist/public/build.js' )
+        this.template( 'build.js',      'dist/public/index.js' )
+        this.template( 'build.html',    'dist/public/build.html' )
     }
-    else {
-		this.template('index.html', 'public/index.html');
-    }
+    
+	this.template('index.html', 'public/index.html');
     
     if ( this.usoSass ) {
         this.template('_config.rb',    'config.rb');
