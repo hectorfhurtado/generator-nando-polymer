@@ -45,6 +45,8 @@ You'll be prompted with various questions:
 What's your name?	( Defaulting to my name )
 What's your application name?
 What's is your app custom tag? 	( It refers in <x-component> the 'x' part. Every webComponent must have a dash ).
+Are you going to use Vulcanize? ( this is a concatenation tool from Polymer-project )
+Are you going to create a chrome app? ( If you are using Vulcanize appears this option because of CSP )
 If your application is going to use a server with socket.io enter a number port.
 
 The first three questions are mandatory, the last if you don't type anything just doesn't add the server scaffolding.
@@ -94,6 +96,14 @@ You can check on when importing components that it's added a link to the created
 
 If you notice a file *.spec.html: this file is used to work in isolation on your component. You can pass objects, probe styles before adding it to your project. It conceived as a sandbox playground for testing your component alone.
 
+### Where is my Chrome App?
+
+Initially, you can check everything loading the unpacked app from dst/. When you type:
+
+    grunt build
+    
+everything goes to dist/ folder, so, you can load the unpacked app from this folder
+
 ### License
 
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
@@ -102,3 +112,7 @@ generator-nando-polymer
 =======================
 
 A Yeoman generator for an alternative Polymer workflow
+
+#### Todo
+
+Make some videos
